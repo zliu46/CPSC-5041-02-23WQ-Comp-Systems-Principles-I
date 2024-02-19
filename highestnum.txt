@@ -1,0 +1,25 @@
+#hw3 Highest number program
+#Register usage:
+#r1 the highest positive number entered by the user
+#r2 input number from the user
+#r3 Hold the value that compares input and the current highest number.
+#Initialize the max number to zero
+#Print a zero if the user did not enter any positive number
+       lli r1 0
+#Create a loop that continuously prompt the user for numbers.
+#get number from the user
+loop:  in r2 
+       #check if number is negative, display the highest number when the user
+       #entered a negative number
+       blt r2 &disp 
+       #Compare the the input number to the highest number 
+       sub r3 r2 r1 
+       #Repeat the program when input number is less than the current highest number
+       blt r3 &loop
+       #Swap the value if input number is larger
+       addi r1 r2 0
+       #Repeat the program
+       beq r0 &loop
+#display the highest number and end the program
+disp:  out r1
+       .halt
